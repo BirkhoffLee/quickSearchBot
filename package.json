@@ -1,0 +1,26 @@
+{
+  "name": "quick-search-bot",
+  "version": "1.0.0",
+  "description": "A Telegram bot for quick searching knowledge on the Internet.",
+  "main": "src/index.coffee",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BirkhoffLee/quickSearchBot.git"
+  },
+  "author": "Birkhoff Lee <birkhoff.lee.cn@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BirkhoffLee/quickSearchBot/issues"
+  },
+  "homepage": "https://github.com/BirkhoffLee/quickSearchBot#readme",
+  "dependencies": {
+    "request": "^2.72.0",
+    "telegram-bot-api": "^1.1.0"
+  }
+}
