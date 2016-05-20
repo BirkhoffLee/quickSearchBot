@@ -56,7 +56,6 @@ bot.on 'message', (message) ->
                         sendResult message, "Sorry, I found nothing about that on Wikipedia."
                         return
                     else
-                        console.log result
                         sendResult message, result
                         return
                 .catch (err) ->
@@ -72,4 +71,4 @@ bot.on 'message', (message) ->
         else
             return
 
-console.log username
+console.log "Connected to Telegram API server.\n"
