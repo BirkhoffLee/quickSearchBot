@@ -87,7 +87,7 @@ bot.on 'message', (message) ->
         when "wolframalpha"
             sendResult message, "wolframalpha"
         when "start", "help"
-            sendResult message, "Currently available commands:\n/wiki: Search something on Wikipedia.\n/wikipedia: Alias of /wiki.\n/google: Search something on Google.\n/wolframalpha"
+            sendResult message, "Available commands:\n/wiki: Search something on Wikipedia.\n/wikipedia: Alias of /wiki.\n/google: Search something on Google."
         else
             return
 
