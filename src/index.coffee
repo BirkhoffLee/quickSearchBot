@@ -6,7 +6,8 @@ username = ""
 # Modules
 #
 searchModules = {}
-searchModules.wiki = require "./modules/wiki.coffee"
+searchModules.wiki   = require "./modules/wiki.coffee"
+searchModules.google = require "./modules/google.coffee"
 
 bot = new Bot
     token: token
@@ -52,18 +53,37 @@ bot.on 'message', (message) ->
 
             searchModules.wiki search
                 .then (result) ->
+
                     if !result
                         sendResult message, "Sorry, I found nothing about that on Wikipedia."
-                        return
                     else
                         sendResult message, result
-                        return
+
                 .catch (err) ->
                     console.error "Error occurred on Wikipedia searching module, code: #{err.toString()}"
                     sendResult message, "Sorry, I ran into an error while searching."
 
         when "google"
-            sendResult message, "google"
+
+            result = null
+            keyword = message.text.slice(firstPiece.length + 1).trim()
+
+            if keyword == ""
+                sendResult message, "You have to provide the keyword for me!"
+                return
+
+            searchModules.google keyword
+                .then (results) ->
+
+                    if results.length == 0
+                        sendResult message, "Sorry, I found nothing about that on Google."
+                    else
+                        sendResult message, results.join("\n\n").trim()
+
+                .catch (err) ->
+                    console.error "Error occurred on Google searching module, code: #{err.toString()}"
+                    sendResult message, "Sorry, I ran into an error while searching."
+
         when "wolframalpha"
             sendResult message, "wolframalpha"
         when "start", "help"
