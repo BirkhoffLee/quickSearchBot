@@ -1,11 +1,8 @@
 {
-  "name": "quick-search-bot",
+  "name": "quickSearchBot",
   "version": "1.0.0",
-  "description": "A Telegram bot for quick searching knowledge on the Internet.",
-  "main": "src/index.coffee",
-  "directories": {
-    "test": "test"
-  },
+  "description": "A Telegram bot for quick searching.",
+  "main": "index.coffee",
   "scripts": {
     "test": "mocha"
   },
@@ -19,8 +16,14 @@
     "url": "https://github.com/BirkhoffLee/quickSearchBot/issues"
   },
   "homepage": "https://github.com/BirkhoffLee/quickSearchBot#readme",
+  "devDependencies": {
+    "coffee-script": "latest",
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0"
+  },
   "dependencies": {
-    "request": "^2.72.0",
+    "q": "^1.4.1",
+    "request-promise": "^3.0.0",
     "telegram-bot-api": "^1.1.0"
   }
 }
