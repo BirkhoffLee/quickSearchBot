@@ -36,6 +36,7 @@ sendResult = (message, text) ->
         chat_id: message.chat.id
         reply_to_message_id: message.message_id
         disable_web_page_preview: "true"
+        parse_mode: "html"
         text: text
     .catch sendMessageErrorHandler
 

@@ -32,8 +32,8 @@ module.exports = (search) ->
                 return 0
 
             try
-                result = jsonObject.query.pages[Object.keys(jsonObject.query.pages)[0]].extract.replace /\n/g, " "
-                result += " [http://zh.wikipedia.org/wiki/" + title.replace(/\s/g, '_') + "]"
+                result = "<b>" + jsonObject.query.pages[Object.keys(jsonObject.query.pages)[0]].extract.replace /\n/g, " "
+                result += "</b> [http://zh.wikipedia.org/wiki/" + title.replace(/\s/g, '_') + "]"
             catch err
                 console.error err
                 deferred.reject 2

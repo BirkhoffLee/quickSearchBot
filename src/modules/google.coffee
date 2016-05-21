@@ -1,8 +1,9 @@
-Q = require "q"
+Q      = require 'q'
+google = require 'google'
+url    = require 'url'
 
 module.exports = (keyword) ->
     deferred = Q.defer()
-    google   = require 'google'
     results  = []
     message  = ""
     counter  = 0
@@ -17,11 +18,14 @@ module.exports = (keyword) ->
             if !single.title || !single.description || !single.link
                 return
 
-            if counter < 5
+            if counter < 3
                 counter++
 
-                description = single.description.slice 0, 150
-                results.push "[#{single.title}] #{description}... [#{single.link}]".replace(/\n/g, " ").trim()
+                domain      = url.parse(single.link).hostname
+                link        = single.link.replace(/\n/g, " ").trim()
+                title       = single.title.replace(/\n/g, " ").trim()
+                description = single.description.slice(0, 150).replace(/\n/g, " ").trim() + "..."
+                results.push "<a href=\"#{link}\">[#{title}]</a> @ <b>#{domain}</b>\n<i>#{description}</i>"
 
         deferred.resolve results
 
