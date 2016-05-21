@@ -1,5 +1,5 @@
 Bot      = require 'telegram-bot-api'
-token    = "221954642:AAHPt8u4tKb4Kb7jhkUHkxcN7C0Qi93VULg"
+token    = "YOUR_TOKEN_HERE"
 username = ""
 
 #
