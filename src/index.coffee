@@ -16,9 +16,16 @@ bot = new Bot
 
 bot.getMe()
     .then (data) ->
+
         username = data.username
+        console.log "Successfully conencted to Telegram API Server."
+
     .catch (err) ->
-        console.error "Unable to get the bot's username."
+        if err.name == "RequestError"
+            console.error "Unable to connect to Telegram API Server."
+        else
+            console.error "Unable to get the bot's username."
+
         process.exit -1
 
 sendMessageErrorHandler = (err) ->
@@ -60,8 +67,12 @@ bot.on 'message', (message) ->
                         sendResult message, result
 
                 .catch (err) ->
-                    console.error "Error occurred on Wikipedia searching module, code: #{err.toString()}"
-                    sendResult message, "Sorry, I ran into an error while searching."
+                    console.error err
+                    if err == 0
+                        sendResult message, "Sorry, I found nothing about that on Wikipedia."
+                    else
+                        console.error "Error occurred in Wikipedia searching module, code: #{err.toString()}"
+                        sendResult message, "Sorry, I ran into an error while searching."
 
         when "google"
 
@@ -81,14 +92,10 @@ bot.on 'message', (message) ->
                         sendResult message, results.join("\n\n").trim()
 
                 .catch (err) ->
-                    console.error "Error occurred on Google searching module, code: #{err.toString()}"
+                    console.error "Error occurred in Google searching module, code: #{err.toString()}"
                     sendResult message, "Sorry, I ran into an error while searching."
 
-        when "wolframalpha"
-            sendResult message, "wolframalpha"
         when "start", "help"
             sendResult message, "Available commands:\n/wiki: Search something on Wikipedia.\n/wikipedia: Alias of /wiki.\n/google: Search something on Google."
         else
             return
-
-console.log "Connected to Telegram API server.\n"

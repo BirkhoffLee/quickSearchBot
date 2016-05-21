@@ -13,8 +13,8 @@ module.exports = (search) ->
         .then (jsonObject) ->
 
             if !jsonObject.query.search[0] || !jsonObject.query.search[0].title
-                console.error "Wikipedia Searching Failed"
                 deferred.reject 0
+                return 0
 
             title = jsonObject.query.search[0].title
 
@@ -27,17 +27,23 @@ module.exports = (search) ->
 
         .then (jsonObject) ->
 
+            if !jsonObject.query
+                deferred.reject 1
+                return 0
+
             try
                 result = jsonObject.query.pages[Object.keys(jsonObject.query.pages)[0]].extract.replace /\n/g, " "
                 result += " [http://zh.wikipedia.org/wiki/" + title.replace(/\s/g, '_') + "]"
             catch err
                 console.error err
-                deferred.reject 1
+                deferred.reject 2
+                return 0
 
             deferred.resolve result
 
         .catch (err) ->
             console.error err
-            deferred.reject 2
+            deferred.reject 3
+            return 0
 
     return deferred.promise
